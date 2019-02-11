@@ -103,13 +103,19 @@ module.exports = class MonitorStats {
         stats = stats.toJson(jsonOpts);
         const prev = data[data.length - 1];
         const parsed = parseStats(stats, target, this.options);
+
+          parsed.metadata = {};
+          if (this.options.onCapture)
+              this.options.onCapture(parsed);
+
         // Check if new data exists
         if (
           !data.length ||
           parsed.hash !== prev.hash ||
           parsed.size !== prev.size ||
           parsed.assets.length !== prev.assets.length ||
-          parsed.chunks.length !== prev.chunks.length
+          parsed.chunks.length !== prev.chunks.length ||
+            (this.options.shouldStoreBuild && this.options.shouldStoreBuild(parsed, prev))
         ) {
           console.log('Writing new build');
           // Add minified data

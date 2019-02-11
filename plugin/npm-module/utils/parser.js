@@ -11,6 +11,7 @@ module.exports = (stats, target, options) => {
     time: stats.time,
     hash: stats.hash,
     errors: stats.errors,
+    metadata: stats.metadata,
 
     size: stats.assets.reduce((totalSize, asset) => totalSize + asset.size, 0),
 
