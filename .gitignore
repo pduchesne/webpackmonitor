@@ -4,4 +4,3 @@ package-lock.json
 monitor
 build/app.js
 build/vendor.js
-plugin/npm-module/build/app.js
